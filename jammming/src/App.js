@@ -11,10 +11,10 @@ function App() {
   const [data, setData] = useState([]);
   const add = (event) => {
     const element = event.target.value;
-    const arrayReal = array[element];
+    const arrayReal = songs[element];
     
     
-    if (!data.includes(array[element])) {
+    if (data[element] !== arrayReal) {
       setData((prev) => 
       [
         <Track2 name={arrayReal.name} artist={arrayReal.artist} key={arrayReal.id} album={arrayReal.album} />,
@@ -24,8 +24,9 @@ function App() {
     }
     
     
+    
   }
-  const array = [
+  const songs = [
     {
     name: "francis forever",
     artist: "mitski",
@@ -39,7 +40,7 @@ function App() {
     id: 2
     }
 ]
-const listItems = array.map((song, index) => <Track name={song.name} artist={song.artist} key={song.id} album={song.album} onClick={add} song={index} />)
+const listItems = songs.map((song, index) => <Track name={song.name} artist={song.artist} key={song.id} album={song.album} onClick={add} song={index} />)
 
   return (
     <div className="App">
