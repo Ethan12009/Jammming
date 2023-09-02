@@ -13,7 +13,7 @@ function Track(props) {
                     <p className={Styles.p}>{props.artist} | {props.album}</p>
                 </div>
                 <div style={{display: "flex", alignItems: "center"}}>
-                <button onClick={props.onClick} className={Styles.button}>+</button>
+                <button value={props.song} onClick={props.onClick} className={Styles.button}>+</button>
                 </div>
             </div>
     )
