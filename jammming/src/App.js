@@ -8,13 +8,22 @@ import Track2 from "./Components/Track2"
 
 function App() {
 
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const add = (event) => {
     const element = event.target.value;
-    setData(() => {
-      return <Track2 name={element.name} artist={element.artist} key={element.id} album={element.album} />
-    }
+    const arrayReal = array[element];
+    
+    
+    if (!data.includes(array[element])) {
+      setData((prev) => 
+      [
+        <Track2 name={arrayReal.name} artist={arrayReal.artist} key={arrayReal.id} album={arrayReal.album} />,
+        ...prev
+      ]
     )
+    }
+    
+    
   }
   const array = [
     {
@@ -30,7 +39,7 @@ function App() {
     id: 2
     }
 ]
-const listItems = array.map((song) => <Track name={song.name} artist={song.artist} key={song.id} album={song.album} onClick={add} song={song}  />)
+const listItems = array.map((song, index) => <Track name={song.name} artist={song.artist} key={song.id} album={song.album} onClick={add} song={index} />)
 
   return (
     <div className="App">

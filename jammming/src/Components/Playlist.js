@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import Track2 from "./Track2";
+import Styles from "../Styles/SearchList.module.css"
+
 
 function Playlist(props) {
     const [input, setInput] = useState("");
@@ -28,8 +30,8 @@ function Playlist(props) {
 
    
     return (
-        <form onSubmit={submitHandler}>
-            <input onChange={inputHandler} type="text" value={input} placeholder="Name your playlist"></input>
+        <form className={Styles.playlist} onSubmit={submitHandler}>
+            <input style={{textAlign: "top"}} onChange={inputHandler} type="text" value={input} placeholder="Name your playlist"></input>
             <ul>{props.list}</ul>
             <button>Save to spotify</button>
         </form>
