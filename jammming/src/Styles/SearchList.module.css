@@ -1,0 +1,29 @@
+.button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: chartreuse;
+    margin: 0 auto;
+    
+}
+.button2 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    margin: 0 auto;
+    
+}
+.track {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid black;
+    margin-bottom: 2px;
+    width: 400px;
+}
+.h3 {
+    font-size: 25px;
+}
+.p {
+    font-size: 15px;
+}
