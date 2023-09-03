@@ -17,7 +17,7 @@ function App() {
     if (data[element] !== arrayReal) {
       setData((prev) => 
       [
-        <Track2 name={arrayReal.name} artist={arrayReal.artist} key={arrayReal.id} album={arrayReal.album} />,
+        [<Track2 name={arrayReal.name} artist={arrayReal.artist} key={arrayReal.id} album={arrayReal.album} />],
         ...prev
       ]
     )
