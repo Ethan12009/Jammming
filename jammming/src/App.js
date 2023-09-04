@@ -10,14 +10,14 @@ function App() {
 
   const [data, setData] = useState([]);
   const add = (event) => {
-    const element = event.target.value;
-    const arrayReal = songs[element];
+    const index = event.target.value;
+    const arrayIndexed = songs[index];
     
     
-    if (data[element] !== arrayReal) {
+    if (data[index] !== arrayIndexed) {
       setData((prev) => 
       [
-        [<Track2 name={arrayReal.name} artist={arrayReal.artist} key={arrayReal.id} album={arrayReal.album} />],
+        [<Track2 name={arrayIndexed.name} artist={arrayIndexed.artist} key={arrayIndexed.id} album={arrayIndexed.album} />],
         ...prev
       ]
     )
