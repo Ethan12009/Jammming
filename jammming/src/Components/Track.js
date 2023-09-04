@@ -2,18 +2,18 @@ import React from "react";
 
 import Styles from "../Styles/SearchList.module.css"
 
-function Track(props) {
+function Track({track, onAdd }) {
     
     
 
     return (
             <div className={Styles.track}>
                 <div style={{marginLeft: 20}}>
-                    <h3 className={Styles.h3}>{props.name}</h3>
-                    <p className={Styles.p}>{props.artist} | {props.album}</p>
+                    <h3 className={Styles.h3}>{track.name}</h3>
+                    <p className={Styles.p}>{track.artist} | {track.album}</p>
                 </div>
                 <div style={{display: "flex", alignItems: "center"}}>
-                <button value={props.song} onClick={props.onClick} className={Styles.button}>+</button>
+                <button  onClick={()=> onAdd(track)} className={Styles.button}>+</button>
                 </div>
             </div>
     )

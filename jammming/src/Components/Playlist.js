@@ -1,38 +1,19 @@
 import React, {useState} from "react";
-import Track2 from "./Track2";
 import Styles from "../Styles/SearchList.module.css"
+import Tracklist from "./Tracklist";
 
-
-function Playlist(props) {
-    const [input, setInput] = useState("");
-    const [playlistName, setPlaylistName] = useState("");
-    const inputHandler = (e) => {
-        setInput(e.target.value)
-    }
+function Playlist({playlistTracks}) {
     const submitHandler = (e) => {
         e.prevent.default();
     }
-    const array = [
-        {
-        name: "francis forever",
-        artist: "mitski",
-        album: "bury me at makeout creek",
-        id: 1,
-        },
-        {
-        name: "waltz for zizi",
-        artist: "seatbelts",
-        album: "cowboy bebop",
-        id: 2
-        }
-    ]
+   
     
 
    
     return (
         <form className={Styles.playlist} onSubmit={submitHandler}>
-            <input style={{textAlign: "top"}} onChange={inputHandler} type="text" value={input} placeholder="Name your playlist"></input>
-            <ul>{props.list}</ul>
+            <h1>Playlist</h1>
+            <Tracklist Tracks={playlistTracks} />
             <button>Save to spotify</button>
         </form>
     )

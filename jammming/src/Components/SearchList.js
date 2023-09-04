@@ -1,20 +1,17 @@
 import React, {useState} from "react";
-import Track from "./Track"
+import Tracklist from "../Components/Tracklist";
+
 import Styles from "../Styles/SearchList.module.css"
 
-function SearchList(props) {
+function SearchList({searchResults, onAdd}) {
     
-
-    
-
-
-    return ( 
+    return (
         <div>
             <h1>Results</h1>
-            <ul>{props.listItems}</ul>
+            <Tracklist Tracks={searchResults} onAdd={onAdd} />
             
         </div>
     )
-}
 
+}
 export default SearchList;

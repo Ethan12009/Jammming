@@ -2,54 +2,69 @@ import React, {useState} from "react";
 import './App.css';
 import SearchBar from "./Components/SearchBar";
 import Playlist from './Components/Playlist';
-import SearchList from './Components/SearchList';
-import Track from "./Components/Track";
-import Track2 from "./Components/Track2"
+import SearchList from './Components/Searchlist';
+import Tracklist from "./Components/Tracklist";
+
 
 function App() {
 
-  const [data, setData] = useState([]);
-  const add = (event) => {
-    const index = event.target.value;
-    const arrayIndexed = songs[index];
-    
-    
-    if (data[index] !== arrayIndexed) {
-      setData((prev) => 
-      [
-        [<Track2 name={arrayIndexed.name} artist={arrayIndexed.artist} key={arrayIndexed.id} album={arrayIndexed.album} />],
-        ...prev
-      ]
-    )
-    }
-    
-    
-    
-  }
-  const songs = [
-    {
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [searchResults, setSearchResults] = useState([{
     name: "francis forever",
     artist: "mitski",
     album: "bury me at makeout creek",
     id: 1,
+    uri: "a"
     },
     {
     name: "waltz for zizi",
     artist: "seatbelts",
     album: "cowboy bebop",
-    id: 2
-    }
-]
-const listItems = songs.map((song, index) => <Track name={song.name} artist={song.artist} key={song.id} album={song.album} onClick={add} song={index} />)
+    id: 2,
+    uri: "b"
+    }]);
+  // const add = (event) => {
+  //   console.log(event)
+  //   const index = event.target.value;
+  //   const arrayIndexed = songs[index];
+  //   console.log(data)
+  //   const 
 
+  //   if (data[index] !== arrayIndexed) {
+  //     setData((prev) => 
+  //     [
+  //       [<RemoveTrack name={arrayIndexed.name} artist={arrayIndexed.artist} key={arrayIndexed.id} album={arrayIndexed.album} />],
+  //       ...prev
+  //     ]
+  //   )
+  //   }
+  // }
+  function addTrack(track){
+    // const playlistSongs = data;
+    // const index = event.target.value;
+    // const arrayIndexed = searchResults[index];
+    // console.log(arrayIndexed);
+    console.log(track)
+    if(playlistTracks.find(song => song.id === track.id)) {
+      
+      return
+    }
+    else {
+      setPlaylistTracks(oldData => [...oldData, track]);
+    }
+    // console.log(data)
+  }
+
+// const listItems = songs.map((song, index) => <Track name={song.name} artist={song.artist} key={song.id} album={song.album} onClick={add} song={index} />)
+  
   return (
     <div className="App">
       <header className="App-header">
         
         <SearchBar/>
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", columnGap: 100}}>
-          <SearchList listItems={listItems}  />
-          <Playlist  list={data} />
+          <SearchList searchResults={searchResults} onAdd={addTrack}  />
+          <Playlist  playlistTracks={playlistTracks} />
         </div>
       </header>
     </div>
