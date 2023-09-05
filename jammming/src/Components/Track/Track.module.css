@@ -23,6 +23,7 @@
 .songName {
     font-size: 25px;
     text-align: left;
+    margin-bottom: 0;
 }
 .songInfo {
     margin-left: 15px;

@@ -1,15 +1,13 @@
 import React, {useState} from "react";
 import Tracklist from "../Tracklist/Tracklist";
 
-function Playlist({playlistTracks}) {
-    const submitHandler = (e) => {
-        e.prevent.default();
-    }
+function Playlist({playlistTracks, onRemove}) {
+    
    
     return (
-        <form  onSubmit={submitHandler}>
+        <form>
             <h1>Playlist</h1>
-            <Tracklist Tracks={playlistTracks} />
+            <Tracklist  Tracks={playlistTracks} onRemove={onRemove} />
             <button>Save to spotify</button>
         </form>
     )

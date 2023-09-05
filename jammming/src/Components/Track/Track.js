@@ -1,7 +1,7 @@
 import React from "react";
 import Styles from "./Track.module.css"
 
-function Track({track, onAdd }) {
+function Track({track, onAdd, onRemove}) {
     
     
 
@@ -12,7 +12,8 @@ function Track({track, onAdd }) {
                     <p className={Styles.songAlbum}>{track.artist} | {track.album}</p>
                 </div>
                 <div className={Styles.buttonHolder}>
-                <button className={Styles.button} onClick={()=> onAdd(track)} >+</button>
+                {onAdd ? <button className={Styles.button} onClick={()=> onAdd(track)} >+</button> 
+                : <button className={Styles.button} onClick={()=> onRemove(track)} >-</button> }
                 </div>
             </div>
     )
