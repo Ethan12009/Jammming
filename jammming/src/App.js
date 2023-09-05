@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import './App.css';
-import SearchBar from "./Components/SearchBar";
-import Playlist from './Components/Playlist';
-import SearchList from './Components/Searchlist';
-import Tracklist from "./Components/Tracklist";
+import SearchBar from "./Components/SearchBar/SearchBar";
+import Playlist from './Components/Playlist/Playlist';
+import SearchList from './Components/Searchlist/Searchlist';
+import Tracklist from "./Components/Tracklist/Tracklist";
 
 
 function App() {

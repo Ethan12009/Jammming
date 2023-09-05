@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import Tracklist from "../Components/Tracklist";
+import Tracklist from "../Tracklist/Tracklist";
 
-import Styles from "../Styles/SearchList.module.css"
 
 function SearchList({searchResults, onAdd}) {
     

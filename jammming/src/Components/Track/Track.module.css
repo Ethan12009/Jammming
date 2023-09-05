@@ -1,0 +1,33 @@
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    border-bottom: 2px solid white;
+}
+.buttonHolder {
+    display: flex;
+    align-items: center;
+}
+.button {
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: #282c34;
+    color: white;
+}
+.button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #282c34;
+}
+.songName {
+    font-size: 25px;
+    text-align: left;
+}
+.songInfo {
+    margin-left: 15px;
+}
+.songAlbum {
+    font-size: 15px;
+    color: rgb(144, 144, 144);
+}

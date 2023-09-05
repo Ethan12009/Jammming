@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import Styles from "../Styles/SearchList.module.css"
-import Tracklist from "./Tracklist";
+import Tracklist from "../Tracklist/Tracklist";
 
 function Playlist({playlistTracks}) {
     const submitHandler = (e) => {
@@ -8,7 +7,7 @@ function Playlist({playlistTracks}) {
     }
    
     return (
-        <form className={Styles.playlist} onSubmit={submitHandler}>
+        <form  onSubmit={submitHandler}>
             <h1>Playlist</h1>
             <Tracklist Tracks={playlistTracks} />
             <button>Save to spotify</button>
