@@ -7,9 +7,6 @@ function Playlist({playlistTracks}) {
         e.prevent.default();
     }
    
-    
-
-   
     return (
         <form className={Styles.playlist} onSubmit={submitHandler}>
             <h1>Playlist</h1>

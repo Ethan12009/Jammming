@@ -46,7 +46,6 @@ function App() {
     // console.log(arrayIndexed);
     console.log(track)
     if(playlistTracks.find(song => song.id === track.id)) {
-      
       return
     }
     else {
