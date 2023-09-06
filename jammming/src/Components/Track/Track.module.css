@@ -9,6 +9,7 @@
     align-items: center;
 }
 .button {
+    text-align: center;
     border: none;
     border-radius: 50%;
     font-size: 20px;

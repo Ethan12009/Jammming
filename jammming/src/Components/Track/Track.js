@@ -13,7 +13,7 @@ function Track({track, onAdd, onRemove}) {
                 </div>
                 <div className={Styles.buttonHolder}>
                 {onAdd ? <button className={Styles.button} onClick={()=> onAdd(track)} >+</button> 
-                : <button className={Styles.button} onClick={()=> onRemove(track)} >-</button> }
+                : <button style={{padding: "1px 8px",}} className={Styles.button} onClick={()=> onRemove(track)} >-</button> }
                 </div>
             </div>
     )
