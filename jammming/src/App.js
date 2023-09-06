@@ -7,7 +7,7 @@ import Tracklist from "./Components/Tracklist/Tracklist";
 
 
 function App() {
-
+  
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [searchResults, setSearchResults] = useState([{
     name: "francis forever",
@@ -48,7 +48,7 @@ function App() {
         <SearchBar/>
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", columnGap: 100}}>
           <SearchList searchResults={searchResults} onAdd={addTrack}  />
-          <Playlist  playlistTracks={playlistTracks} onRemove={removeTrack} />
+          <Playlist  playlistTracks={playlistTracks} onRemove={removeTrack}  />
         </div>
       </header>
     </div>

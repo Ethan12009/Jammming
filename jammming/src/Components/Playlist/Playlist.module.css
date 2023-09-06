@@ -1,0 +1,16 @@
+.playlistName{
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: #282c34;
+    font-size: 1.2em;
+    color: white;
+    width: 8em;
+    margin-bottom: 41px;
+    font-weight: bold;
+}
+.playlistName:focus {
+    outline: none;
+}
+.form {
+    height: 8em;
+}
