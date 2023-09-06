@@ -8,8 +8,9 @@ function Tracklist({Tracks, onAdd, onRemove}) {
         <div>
             {Tracks.map((track, index) =>
             <Track 
+            key={track.id}
             track={track}
-            key={index}
+            index={index}
             onAdd={onAdd}
             onRemove={onRemove}
              />)}

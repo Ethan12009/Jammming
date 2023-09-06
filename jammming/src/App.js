@@ -34,10 +34,11 @@ function App() {
       setPlaylistTracks(oldData => [ ...oldData, track]);
     }
   }
-  const removeTrack = (track) => {
-    const updatedList = playlistTracks.filter((currentItem) => track.id !== currentItem.id)
-    setPlaylistTracks(updatedList)
-    console.log(updatedList)  
+  const removeTrack = (targetIndex) => {
+    setPlaylistTracks(prev=> prev.filter((item, index) => index !== targetIndex))
+    // const updatedList = playlistTracks.filter((currentItem) => track.id !== currentItem.id)
+    // setPlaylistTracks(updatedList)
+    // console.log(updatedList)  
   }
 
   return (
