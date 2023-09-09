@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-
+import Styles from "../SearchBar/SearchBar.module.css"
 
 function SearchBar() {
     const [input, setInput] = useState("")
@@ -8,7 +8,7 @@ function SearchBar() {
         setInput(e.target.value)
     }
     return (
-        <form>
+        <form className={Styles.bar}>
             <input value={input} onChange={handleInputChange} placeholder="Search for music" type="text" />
             <button >Search</button>
         </form>
