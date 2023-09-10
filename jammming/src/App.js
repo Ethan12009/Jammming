@@ -46,20 +46,20 @@ function App() {
 //   }
 // }
 
-const auth = async () => {
-  let url = "https://accounts.spotify.com/authorize"
-  const client_id = "abe8d36909674f07a5ef4e8bc1de4c34";
-  const redirect_uri = "http://localhost:3000";
-  const state = getRandomString(16);
-  url += "?response_type=token";
-  url += "&client_id=" + encodeURIComponent(client_id);
-  url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
-  url += "&state=" + encodeURIComponent(state);
-  const response = await fetch(url, {});
-  console.log(response)
+// const auth = async () => {
+//   let url = "https://accounts.spotify.com/authorize"
+//   const client_id = "abe8d36909674f07a5ef4e8bc1de4c34";
+//   const redirect_uri = "http://localhost:3000";
+//   const state = getRandomString(16);
+//   url += "?response_type=token";
+//   url += "&client_id=" + encodeURIComponent(client_id);
+//   url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
+//   url += "&state=" + encodeURIComponent(state);
+//   const response = await fetch(url, {});
+//   console.log(response)
 
-}
-auth()
+// }
+// auth()
 
 const handleChange = (event) => {
   setPlaylistName(event.target.value)
