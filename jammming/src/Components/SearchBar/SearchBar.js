@@ -1,15 +1,11 @@
 import React, {useState} from "react";
 import Styles from "../SearchBar/SearchBar.module.css"
 
-function SearchBar() {
-    const [input, setInput] = useState("")
+function SearchBar({onChange, searchInput, search}) {
 
-    const handleInputChange = (e) => {
-        setInput(e.target.value)
-    }
     return (
-        <form className={Styles.bar}>
-            <input value={input} onChange={handleInputChange} placeholder="Search for music" type="text" />
+        <form className={Styles.bar} onSubmit={search}>
+            <input value={searchInput} onChange={onChange} placeholder="Search for music" type="text" />
             <button >Search</button>
         </form>
     )
