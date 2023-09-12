@@ -9,6 +9,7 @@ function Tracklist({Tracks, onAdd, onRemove}) {
             {Tracks.map((track, index) =>
             <Track 
             key={track.id}
+            results={Tracks}
             track={track}
             index={index}
             onAdd={onAdd}

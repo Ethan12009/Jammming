@@ -3,6 +3,7 @@
     justify-content: space-between;
     column-gap: 20px;
     border-bottom: 2px solid white;
+    width: 100%;
 }
 .buttonHolder {
     display: flex;

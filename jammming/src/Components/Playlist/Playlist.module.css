@@ -2,7 +2,7 @@
     border: none;
     border-bottom: 2px solid white;
     background-color: #282c34;
-    width: 280px;
+    width: 400px;
     color: white;
     font-size: 30px;
     margin-bottom: 41px;
@@ -13,6 +13,6 @@
     outline: none;
 }
 .form {
-
+    
     height: 27em;
 }

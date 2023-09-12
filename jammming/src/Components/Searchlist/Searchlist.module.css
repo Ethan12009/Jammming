@@ -1,8 +1,9 @@
 .div {
     height: 27em;
+    width: 400px;
 }
 .header {
     margin-bottom: 41px; 
     margin-top: 0;  
-    font-size: 1.4em;
+    font-size: 30px;
 }

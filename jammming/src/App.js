@@ -12,20 +12,7 @@ function App() {
   const [token, setToken] = useState("")
   const [playlistName, setPlaylistName] = useState("")
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [searchResults, setSearchResults] = useState([{
-    name: "francis forever",
-    artist: "mitski",
-    album: "bury me at makeout creek",
-    id: 1,
-    uri: "spotify:track:6rqhFgbbKwnb9MLmUQDhG6"
-  },
-  {
-    name: "waltz for zizi",
-    artist: "seatbelts",
-    album: "cowboy bebop",
-    id: 2,
-    uri: "https://open.spotify.com/track/7lQasnlWcxSwfT17sFklTx?si=a2cfd6ee34ed4c65"
-  }]);
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.href);
@@ -115,7 +102,7 @@ function App() {
       <header className="App-header">
         <Login token={token} url={url} expiry={expiry} />
         <SearchBar search={search} searchInput={searchInput} onChange={handleSearch} />
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", columnGap: 100 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", columnGap: 200 }}>
           <SearchList searchResults={searchResults} onAdd={addTrack} />
           <Playlist playlistTracks={playlistTracks} onRemove={removeTrack} onChange={handleChange} onSubmit={handleSubmit} playlistName={playlistName} />
         </div>
