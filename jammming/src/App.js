@@ -29,40 +29,34 @@ function App() {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.href);
-    const url = new URLSearchParams(window.location.search)
     const expiryTime = queryParams.get("expires_in")
-    let urlToken = queryParams.get("access_token")
-    // const hash = window.location.hash
-    // let token = window.localStorage.getItem("token")
+    let hash = window.location.hash
+    
 
-    // if (!token && hash) {
-    //   token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-
-    //   window.location.hash = ""
-    //   window.localStorage.setItem("token", token)
-    // }
+    
+    if (hash) {
+      let token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+      setToken(token)
+    }
     setExpiry(expiryTime)
-    setToken(urlToken)
     if(expiryTime) {
       setTimeout(() => {setExpiry(0); window.location.hash = ""}, expiryTime * 1000 )
-   
     }
     // console.log(token)
     // console.log(expiryTime)
   }, [])
-  console.log(expiry)
-  console.log(token)
+
   const search = async () => {
-    console.log(token)
+    // console.log(token)
     let searchEndpoint = `https://api.spotify.com/v1/search?q=${searchInput}&type=track`
     const response = await fetch(searchEndpoint, {headers: {
       Authorization: `Bearer ${token}`
     }})
-    if(response.ok) {
-      console.log(response)
-    }
-    // setSearchResults(await response.json())
+    const jsonResponse = await response.json();
+    // console.log(jsonResponse.tracks.items.slice(0, 10))
+    setSearchResults(jsonResponse.tracks.items.slice(0, 10))
   }
+  // console.log(searchResults)
   const getRandomString = (length) => {
     let text = "";
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789"
@@ -93,6 +87,8 @@ function App() {
       newArray.push(track.uri)
     }
     const savedName = playlistName;
+    // console.log(savedName)
+    // console.log(newArray)
     setPlaylistTracks([])
     setPlaylistName("")
   }

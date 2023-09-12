@@ -22,7 +22,7 @@
     color: #282c34;
 }
 .songName {
-    font-size: 25px;
+    font-size: 20px;
     text-align: left;
     margin-bottom: 0;
 }
@@ -32,4 +32,5 @@
 .songAlbum {
     font-size: 15px;
     color: rgb(144, 144, 144);
+    text-align: left;
 }
