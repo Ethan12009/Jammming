@@ -7,43 +7,41 @@ import Login from "./Components/Login/Login";
 
 
 function App() {
+  // states
   const [searchInput, setSearchInput] = useState("");
   const [expiry, setExpiry] = useState()
   const [token, setToken] = useState("")
   const [playlistName, setPlaylistName] = useState("")
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
+  // getting token
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.href);
     const expiryTime = queryParams.get("expires_in")
     let hash = window.location.hash
-    
-
-    
     if (hash) {
       let token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
       setToken(token)
     }
     setExpiry(expiryTime)
-    if(expiryTime) {
-      setTimeout(() => {setExpiry(0); window.location.hash = ""}, expiryTime * 1000 )
+    if (expiryTime) {
+      setTimeout(() => { setExpiry(0); window.location.hash = "" }, expiryTime * 1000)
     }
     // console.log(token)
     // console.log(expiryTime)
   }, [])
-
+  // song serach
   const search = async () => {
-    // console.log(token)
     let searchEndpoint = `https://api.spotify.com/v1/search?q=${searchInput}&type=track`
-    const response = await fetch(searchEndpoint, {headers: {
-      Authorization: `Bearer ${token}`
-    }})
+    const response = await fetch(searchEndpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     const jsonResponse = await response.json();
-    // console.log(jsonResponse.tracks.items.slice(0, 10))
     setSearchResults(jsonResponse.tracks.items.slice(0, 10))
   }
-  // console.log(searchResults)
+  // token access
   const getRandomString = (length) => {
     let text = "";
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789"
@@ -60,31 +58,63 @@ function App() {
   url += "&client_id=" + encodeURIComponent(client_id);
   url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
   url += "&state=" + encodeURIComponent(state);
-
+  url += "&scope=playlist-modify-private playlist-modify-public"
+  // handlers
   const handleChange = (event) => {
     setPlaylistName(event.target.value)
   }
   const handleSearch = (e) => {
     setSearchInput(e.target.value)
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const newArray = [];
+    const addedTracks = [];
     for (const track of playlistTracks) {
-      newArray.push(track.uri)
+      addedTracks.push(track.uri)
     }
     const savedName = playlistName;
-    // console.log(savedName)
-    // console.log(newArray)
+    // user ID
+    const userIdEndpoint = "https://api.spotify.com/v1/me";
+    const userResponse = await fetch(userIdEndpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const jsonUserResponse = await userResponse.json();
+    const userId = jsonUserResponse.id;
+    // making playlist
+    const playlistEndpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
+    const playlistPost = await fetch(playlistEndpoint, {
+      method: "POST", body: JSON.stringify({ name: savedName, description: "", public: false }),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    // playlist ID
+    const jsonPlaylistPost = await playlistPost.json();
+    const jsonPlaylistPostId = jsonPlaylistPost.id;
+    // adding songs to playlist 
+    const playlistAddEndpoint = `https://api.spotify.com/v1/playlists/${jsonPlaylistPostId}/tracks`;
+    const playlistAdd = await fetch(playlistAddEndpoint, {
+      method: "POST",
+
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        uris: addedTracks,
+        position: 0
+      }),
+    })
+    console.log(await playlistAdd.json())
     setPlaylistTracks([])
     setPlaylistName("")
   }
 
 
-
   function addTrack(track) {
-
-
     if (playlistTracks.find(song => song.id === track.id)) {
       return
     }
@@ -94,7 +124,6 @@ function App() {
   }
   const removeTrack = (targetIndex) => {
     setPlaylistTracks(prev => prev.filter((item, index) => index !== targetIndex))
-
   }
 
   return (
