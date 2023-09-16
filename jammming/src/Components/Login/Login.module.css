@@ -1,0 +1,13 @@
+.link {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 7px 14px;
+    border-radius: 20px;
+}
+.div{
+    margin-top: 50px;
+}
+.logged {
+    margin: 0;
+}

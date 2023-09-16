@@ -8,6 +8,7 @@ import Login from "./Components/Login/Login";
 
 function App() {
   // states
+  const [saving, setSaving] = useState(false)
   const [searchInput, setSearchInput] = useState("");
   const [expiry, setExpiry] = useState()
   const [token, setToken] = useState("")
@@ -22,15 +23,16 @@ function App() {
     if (hash) {
       let token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
       setToken(token)
+      setExpiry(expiryTime)
     }
-    setExpiry(expiryTime)
+
     if (expiryTime) {
       setTimeout(() => { setExpiry(0); window.location.hash = "" }, expiryTime * 1000)
     }
     // console.log(token)
     // console.log(expiryTime)
   }, [])
-  // song serach
+  // song search
   const search = async () => {
     let searchEndpoint = `https://api.spotify.com/v1/search?q=${searchInput}&type=track`
     const response = await fetch(searchEndpoint, {
@@ -39,7 +41,8 @@ function App() {
       }
     })
     const jsonResponse = await response.json();
-    setSearchResults(jsonResponse.tracks.items.slice(0, 10))
+   
+    setSearchResults(jsonResponse.tracks.items.slice(0,10))
   }
   // token access
   const getRandomString = (length) => {
@@ -82,6 +85,7 @@ function App() {
     })
     const jsonUserResponse = await userResponse.json();
     const userId = jsonUserResponse.id;
+
     // making playlist
     const playlistEndpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
     const playlistPost = await fetch(playlistEndpoint, {
@@ -95,22 +99,30 @@ function App() {
     const jsonPlaylistPost = await playlistPost.json();
     const jsonPlaylistPostId = jsonPlaylistPost.id;
     // adding songs to playlist 
+    setSaving(true)
     const playlistAddEndpoint = `https://api.spotify.com/v1/playlists/${jsonPlaylistPostId}/tracks`;
-    const playlistAdd = await fetch(playlistAddEndpoint, {
-      method: "POST",
+    try {
+      const playlistAdd = await fetch(playlistAddEndpoint, {
+        method: "POST",
 
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        uris: addedTracks,
-        position: 0
-      }),
-    })
-    console.log(await playlistAdd.json())
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          uris: addedTracks,
+          position: 0
+        }),
+      })
+    }
+    catch (e) {
+      console.log(e)
+    }
+    setSaving(false)
+    // console.log(await playlistAdd.json())
     setPlaylistTracks([])
     setPlaylistName("")
+
   }
 
 
@@ -133,7 +145,7 @@ function App() {
         <SearchBar search={search} searchInput={searchInput} onChange={handleSearch} />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", columnGap: 200 }}>
           <SearchList searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} onRemove={removeTrack} onChange={handleChange} onSubmit={handleSubmit} playlistName={playlistName} />
+          <Playlist saving={saving} playlistTracks={playlistTracks} onRemove={removeTrack} onChange={handleChange} onSubmit={handleSubmit} playlistName={playlistName} />
         </div>
       </header>
     </div>
